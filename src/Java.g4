@@ -11,7 +11,7 @@ SingleTypeImportDeclaration : 'import' TypeName ';';//<single type import declar
 TypeImportOnDemandDeclaration : 'import' PackageName .* ';';//<type import on demand declaration> ::= import <package name> . * ;
 TypeDeclarations : TypeDeclaration | TypeDeclarations TypeDeclaration;//<type declarations> ::= <type declaration> | <type declarations> <type declaration>
 TypeDeclaration : ClassDeclaration | InterfaceDeclaration | ';';//<type declaration> ::= <class declaration> | <interface declaration> | ;
-ClassDeclaration : ClassModifiers? 'class' Identifier Super? Interfaces? ClassDody;//<class declaration> ::= <class modifiers>? class <identifier> <super>? <interfaces>? <class body>
+ClassDeclaration : ClassModifiers? 'class' Identifier Super? Interfaces? ClassBody;//<class declaration> ::= <class modifiers>? class <identifier> <super>? <interfaces>? <class body>
 ClassModifiers : ClassModifier | ClassModifiers ClassModifier;//<class modifiers> ::= <class modifier> | <class modifiers> <class modifier>
 ClassModifier : 'public' | 'abstract' | 'final';//<class modifier> ::= public | abstract | final
 Super : 'extends' ClassType;//<super> ::= extends <class type>
