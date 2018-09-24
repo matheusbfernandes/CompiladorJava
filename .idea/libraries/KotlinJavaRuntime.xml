@@ -6,7 +6,7 @@
       <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-test.jar!/" />
       <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-stdlib-jdk7.jar!/" />
       <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-stdlib-jdk8.jar!/" />
-      <root url="jar://D:/antlr-4.7.1-complete.jar!/" />
+      <root url="jar://$PROJECT_DIR$/antlr-4.7.1-complete.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
