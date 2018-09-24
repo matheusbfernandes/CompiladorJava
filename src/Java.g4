@@ -50,41 +50,41 @@ VOLATILE : 'volatile';
 WHILE : 'while';
 
 // operadores
-OpIgualdade : '==';
-OpDesigualdade : '!=';
-OpMenor : '<';
-OpMaior : '>';
-OpMenorIgual : '<=';
-OpMaiorIgual : '>=';
-OpSoma : '+';
-OpSub : '-';
-OpMulti : '*';
-OpDiv : '/';
-OpResto : '%';
-OpAND : '&&';
-OpOR : '||';
+OpAtribuicao : '=';
 OpNOT : '!';
 OpBitAND : '&';
 OpBitOR : '|';
 OpBitXOR : '^';
 OpBitComp : '~';
-OpShitLeft : '<<';
-OpShitRight : '>>';
-OpShiftZeroRight : '>>>';
-OpAtribuicao : '=';
+OpMenor : '<';
+OpMaior : '>';
+OpSoma : '+';
+OpSub : '-';
+OpMulti : '*';
+OpDiv : '/';
+OpResto : '%';
+OpIgualdade : '==';
+OpDesigualdade : '!=';
+OpMenorIgual : '<=';
+OpMaiorIgual : '>=';
 OpMultiAtribuicao : '*=';
 OpDivAtribuicao : '/=';
 OpRestoAtribuicao : '%=';
 OpSomaAtribuicao : '+=';
 OpSubAtribuicao : '-=';
-OpLeftAtribuicao : '<<=';
-OpRightAtribuicao : '>>=';
-OpRightZeroAtribuicao : '>>>=';
 OpANDAtribuicao : '&=';
 OpXORAtribuicao : '^=';
 OpORAtribuicao : '|=';
 Incremento : '++';
 Decremento : '--';
+OpAND : '&&';
+OpOR : '||';
+OpShitLeft : '<<';
+OpShitRight : '>>';
+OpShiftZeroRight : '>>>';
+OpLeftAtribuicao : '<<=';
+OpRightAtribuicao : '>>=';
+OpRightZeroAtribuicao : '>>>=';
 
 // constantes
 fragment
@@ -115,9 +115,6 @@ Espaco : ('\t' | ' ' | '\r' | '\n' | '\u000C')+ -> skip;
 ComentarioLinha : '//' ~[\r\n]* -> skip;
 ComentarioBloco : '/*' .*? '*/' -> skip;
 
-// identificador
-ID: (('a'..'z') | ('A'..'Z') | '_' | '$') (('a'..'z') | ('A'..'Z') | ('0'..'9') | '_' | '$')*;
-
 // simbolo de pontuação
 AP : '(';
 FP : ')';
@@ -130,3 +127,6 @@ DoisPontos : ':';
 Ponto : '.';
 Interrogacao : '?';
 PontoVirgula : ';';
+
+// identificador
+ID: (('a'..'z') | ('A'..'Z') | '_' | '$') (('a'..'z') | ('A'..'Z') | ('0'..'9') | '_' | '$')*;
