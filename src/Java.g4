@@ -48,6 +48,12 @@ TRY : 'try';
 VOID : 'void';
 VOLATILE : 'volatile';
 WHILE : 'while';
+NULL : 'null';
+TRUE : 'true';
+FALSE : 'false';
+
+// identificador
+ID: (('a'..'z') | ('A'..'Z') | '_' | '$') (('a'..'z') | ('A'..'Z') | ('0'..'9') | '_' | '$')*;
 
 // operadores
 OpAtribuicao : '=';
@@ -102,15 +108,13 @@ HexDigit : '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | 'a' | 'b'
 fragment
 EscapeSequence : '\\''t' | '\\''b' | '\\''n' | '\\''r' | '\\''f' | '\\''\'' | '\\''\\' | '\\''"';
 
-DecimalNumeral : '0' ('l' | 'L') | NonZeroDigit Digit* ('l' | 'L');
-OctalNumeral : '0' OctalDigit* ('l' | 'L');
-HexNumeral : '0x' HexDigit* ('l' | 'L') | '0X' HexDigit* ('l' | 'L');
-FloatNumeral : Digit+ (((('.' Digit+)? (('e' | 'E') Digit+)?) ('f' | 'F')?) | ('.' ('f' | 'F')) | (('.' ('e' | 'E') Digit+) ('f' | 'F')?));
+DecimalNumeral : '0' ('l' | 'L')? | NonZeroDigit Digit* ('l' | 'L')?;
+OctalNumeral : '0' OctalDigit* ('l' | 'L')?;
+HexNumeral : '0x' HexDigit* ('l' | 'L')? | '0X' HexDigit* ('l' | 'L')?;
+//FloatNumeral : Digit+ (((('.' Digit+)? (('e' | 'E') Digit+)?) ('f' | 'F')?) | ('.' ('f' | 'F')) | (('.' ('e' | 'E') Digit+) ('f' | 'F')?));
 DoubleNumeral : Digit+ (((('.' Digit+)? (('e' | 'E') Digit+)?) ('f' | 'F' | 'd' | 'D')?) | ('.' ('f' | 'F' | 'd' | 'D')) | (('.' ('e' | 'E') Digit+) ('f' | 'F' | 'd' | 'D')?));
 Character : '\''~('"' | '\\')'\'' | '\'' EscapeSequence '\'';
 String : '"'(~('"' | '\\') | EscapeSequence)*'"';
-BooleanLiteral : 'true' | 'false';
-NULL : 'null';
 Espaco : ('\t' | ' ' | '\r' | '\n' | '\u000C')+ -> skip;
 ComentarioLinha : '//' ~[\r\n]* -> skip;
 ComentarioBloco : '/*' .*? '*/' -> skip;
@@ -127,6 +131,3 @@ DoisPontos : ':';
 Ponto : '.';
 Interrogacao : '?';
 PontoVirgula : ';';
-
-// identificador
-ID: (('a'..'z') | ('A'..'Z') | '_' | '$') (('a'..'z') | ('A'..'Z') | ('0'..'9') | '_' | '$')*;
