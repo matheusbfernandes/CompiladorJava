@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/JavaScanner.iml" filepath="$PROJECT_DIR$/JavaScanner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CompiladorJava.iml" filepath="$PROJECT_DIR$/CompiladorJava.iml" />
     </modules>
   </component>
 </project>
