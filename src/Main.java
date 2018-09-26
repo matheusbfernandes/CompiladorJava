@@ -14,18 +14,18 @@ public class Main {
         allTokensGenerated.fill();
         List<Token> l = allTokensGenerated.getTokens();
         TabelaSimbolos tabela = new TabelaSimbolos(l);
-        System.out.println("+=======================================+");
-        System.out.format("|%-15s |%-6s |%-6s |%-6s|%n","LEXEMA", "TIPO", "LINHA", "COLUNA");
-        System.out.println("|----------------|-------|-------|------|");
+        System.out.println("+========================================+");
+        System.out.format("|%-16s |%-6s |%-6s |%-6s|%n","LEXEMA", "TIPO", "LINHA", "COLUNA");
+        System.out.println("|-----------------|-------|-------|------|");
         for (Token t : l) {
             if (t.getType() == 107) {
-                System.out.format("|Token '%s' nao reconhecido na linha:%d:%d|%n", t.getText(), t.getLine(), t.getCharPositionInLine());
+                System.out.format("|Token '%s' nao reconhecido na linha: %d:%d|%n", t.getText(), t.getLine(), t.getCharPositionInLine());
             }
             else {
-                System.out.format("|%-15s |%-6d |%-6d |%-6d|%n", t.getText(), t.getType(), t.getLine(), t.getCharPositionInLine());
+                System.out.format("|%-16s |%-6d |%-6d |%-6d|%n", t.getText(), t.getType(), t.getLine(), t.getCharPositionInLine());
             }
         }
-        System.out.println("+=======================================+");
+        System.out.println("+========================================+");
         System.out.println();
         System.out.print(tabela.getConteudo());
     }
