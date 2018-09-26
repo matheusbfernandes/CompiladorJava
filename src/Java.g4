@@ -131,3 +131,6 @@ DoisPontos : ':';
 Ponto : '.';
 Interrogacao : '?';
 PontoVirgula : ';';
+
+// erro
+ERROR : .;

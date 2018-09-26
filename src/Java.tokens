@@ -104,6 +104,7 @@ DoisPontos=103
 Ponto=104
 Interrogacao=105
 PontoVirgula=106
+ERROR=107
 'abstract'=1
 'boolean'=2
 'break'=3
