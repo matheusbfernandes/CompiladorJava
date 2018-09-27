@@ -7,24 +7,27 @@ import java.util.HashMap;
 import java.util.List;
 
 public class TabelaSimbolos {
-    private HashMap<String, String> tabela;
+    private HashMap<String, String> tabelaSimbolos;
 
-    public TabelaSimbolos(List<Token> l) {
-        tabela = new HashMap<>();
-        for (Token t : l) {
+    public TabelaSimbolos(List<Token> listaTokens) {
+        tabelaSimbolos = new HashMap<>();
+
+        for (Token t : listaTokens) {
             if (t.getType() == 51) {
-                tabela.putIfAbsent(t.getText(), t.getText());
+                tabelaSimbolos.putIfAbsent(t.getText(), t.getText());
             }
         }
     }
 
     public String getConteudo() {
-        Collection<String> c = tabela.values();
+        Collection<String> c = tabelaSimbolos.values();
+
         StringBuilder lexemas = new StringBuilder("+==================+\n|Tabela de Simbolos|\n|------------------|\n");
         for (String s : c) {
             lexemas.append(String.format("|%-18s|%n", s));
         }
         lexemas.append("+==================+\n");
+
         return lexemas.toString();
     }
 }
