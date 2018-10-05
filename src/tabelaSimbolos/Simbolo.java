@@ -29,19 +29,19 @@ public class Simbolo {
             case 89:
                 nomeDoTipo = "HexNumeral";
                 break;
+//            case 90:
+//                nomeDoTipo = "FloatNumeral";
+//                break;
             case 90:
-                nomeDoTipo = "FloatNumeral";
-                break;
-            case 91:
                 nomeDoTipo = "DoubleNumeral";
                 break;
-            case 92:
+            case 91:
                 nomeDoTipo = "Character";
                 break;
-            case 93:
+            case 92:
                 nomeDoTipo = "String";
                 break;
-            case 97:
+            case 51:
                 nomeDoTipo = "ID";
                 break;
             default:

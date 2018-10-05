@@ -23,11 +23,11 @@ public class Main {
         System.out.format("|%-16s |%-6s |%-6s |%-6s|%n","LEXEMA", "TIPO", "LINHA", "COLUNA");
         System.out.println("|-----------------|-------|-------|------|");
         for (Token t : listaTokens) {
-            if (t.getType() == scanner.getErro()) {
+            if (t.getType() == 107) {
                 System.out.format("|Token '%s' nao reconhecido na linha: %d:%d|%n", t.getText(), t.getLine(), t.getCharPositionInLine());
             }
             else {
-                if (t.getType() == 87 || t.getType() == 88 || t.getType() == 89 || t.getType() == 90 || t.getType() == 91 || t.getType() == 92 || t.getType() == 93 || t.getType() == 97) {
+                if (t.getType() == 87 || t.getType() == 88 || t.getType() == 89 || t.getType() == 90 || t.getType() == 91 || t.getType() == 92 || t.getType() == 51) {
                     TabelaSimbolos.getInstancia().addSimbolo(new Simbolo(t.getText(), t.getType()));
                 }
 
