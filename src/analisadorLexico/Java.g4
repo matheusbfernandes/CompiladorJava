@@ -16,7 +16,7 @@ importDeclaration : singleTypeImportDeclaration | typeImportOnDemandDeclaration;
 singleTypeImportDeclaration : IMPORT typeName PontoVirgula;//<single type import declaration> ::= import <type name> ;
 typeImportOnDemandDeclaration : IMPORT packageName Ponto OpMulti PontoVirgula;//<type import on demand declaration> ::= import <package name> . * ;
 typeDeclarations : typeDeclaration | typeDeclarations typeDeclaration;//<type declarations> ::= <type declaration> | <type declarations> <type declaration>
-typeDeclaration : classDeclaration | InterfaceDeclaration | PontoVirgula;//<type declaration> ::= <class declaration> | <interface declaration> | ;
+typeDeclaration : classDeclaration | interfaceDeclaration | PontoVirgula;//<type declaration> ::= <class declaration> | <interface declaration> | ;
 classDeclaration : classModifiers? CLASS ID super? interfaces? classBody;//<class declaration> ::= <class modifiers>? class <identifier> <super>? <interfaces>? <class body>
 classModifiers : classModifier | classModifiers classModifier;//<class modifiers> ::= <class modifier> | <class modifiers> <class modifier>
 classModifier : PUBLIC | ABSTRACT | FINAL;//<class modifier> ::= public | abstract | final
@@ -51,7 +51,7 @@ resultType : type | VOID;//<result type> ::= <type> | void
 methodModifiers : methodModifier | methodModifiers methodModifier;//<method modifiers> ::= <method modifier> | <method modifiers> <method modifier>
 methodModifier : PUBLIC | PROTECTED | PRIVATE | STATIC | ABSTRACT | FINAL | SYNCHRONIZED | NATIVE;//<method modifier> ::= public | protected | private | static | abstract | final | synchronized | native
 methodDeclarator : ID AP formalParameterList? FP;//<method declarator> ::= <identifier> ( <formal parameter list>? )
-methodBody : block | Virgula;//<method body> ::= <block> | ;
+methodBody : block | PontoVirgula;//<method body> ::= <block> | ;
 interfaceDeclaration : interfaceModifiers? INTERFACE ID extendsInterfaces? interfaceBody;//<interface declaration> ::= <interface modifiers>? interface <identifier> <extends interfaces>? <interface body>
 interfaceModifiers : interfaceModifier | interfaceModifiers interfaceModifier;//<interface modifiers> ::= <interface modifier> | <interface modifiers> <interface modifier>
 interfaceModifier : PUBLIC | ABSTRACT;//<interface modifier> ::= public | abstract
@@ -88,7 +88,7 @@ localVariableDeclarationStatement : localVariableDeclaration ';';//<local variab
 localVariableDeclaration : type variableDeclarators;//<local variable declaration> ::= <type> <variable declarators>
 statement : statementWithoutTrailingSubstatement | labeledStatement | ifThenStatement | ifThenElseStatement | whileStatement | forStatement;//<statement> ::= <statement without trailing substatement> | <labeled statement> | <if then statement> | <if then else statement> | <while statement> | <for statement>
 statementNoShortIf : statementWithoutTrailingSubstatement | labeledStatementNoShortIf | ifThenElseStatementNoShortIf | whileStatementNoShortIf | forStatementNoShortIf;//<statement no short if> ::= <statement without trailing substatement> | <labeled statement no short if> | <if then else statement no short if> | <while statement no short if> | <for statement no short if>
-statementWithoutTrailingSubstatement : block | emptyStatement | expressionStatement | switchStatement | doStatement | breakStatement | continueStatement | returnStatement | synchronizedStatement | throwsStatements | tryStatement;//<statement without trailing substatement> ::= <block> | <empty statement> | <expression statement> | <switch statement> | <do statement> | <break statement> | <continue statement> | <return statement> | <synchronized statement> | <throws statements> | <try statement>
+statementWithoutTrailingSubstatement : block | emptyStatement | expressionStatement | switchStatement | doStatement | breakStatement | continueStatement | returnStatement | synchronizedStatement | throwsStatement | tryStatement;//<statement without trailing substatement> ::= <block> | <empty statement> | <expression statement> | <switch statement> | <do statement> | <break statement> | <continue statement> | <return statement> | <synchronized statement> | <throws statements> | <try statement>
 emptyStatement : PontoVirgula;//<empty statement> ::= ;
 labeledStatement : ID DoisPontos statement;//<labeled statement> ::= <identifier> : <statement>
 labeledStatementNoShortIf : ID DoisPontos statementNoShortIf;//<labeled statement no short if> ::= <identifier> : <statement no short if>

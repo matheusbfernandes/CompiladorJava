@@ -27,7 +27,7 @@ public class Main {
                 System.out.format("|Token '%s' nao reconhecido na linha: %d:%d|%n", t.getText(), t.getLine(), t.getCharPositionInLine());
             }
             else {
-                if (t.getType() == 87 || t.getType() == 88 || t.getType() == 89 || t.getType() == 90 || t.getType() == 91 || t.getType() == 92 || t.getType() == 51) {
+                if (t.getType() == 51) {
                     TabelaSimbolos.getInstancia().addSimbolo(new Simbolo(t.getText(), t.getType()));
                 }
 
