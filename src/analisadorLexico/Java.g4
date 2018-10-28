@@ -1,5 +1,11 @@
 grammar Java;
 
+/*
+*
+*ANALISADOR SINTATICO
+*
+*/
+
 //Programs
 compilationUnit : packageDeclaration? importDeclarations? typeDeclarations?;//<compilation unit> ::= <package declaration>? <import declarations>? <type declarations>?
 
@@ -12,40 +18,40 @@ typeImportOnDemandDeclaration : IMPORT packageName Ponto OpMulti PontoVirgula;//
 typeDeclarations : typeDeclaration | typeDeclarations typeDeclaration;//<type declarations> ::= <type declaration> | <type declarations> <type declaration>
 typeDeclaration : classDeclaration | InterfaceDeclaration | PontoVirgula;//<type declaration> ::= <class declaration> | <interface declaration> | ;
 classDeclaration : classModifiers? CLASS ID super? interfaces? classBody;//<class declaration> ::= <class modifiers>? class <identifier> <super>? <interfaces>? <class body>
-ClassModifiers : ClassModifier | ClassModifiers ClassModifier;//<class modifiers> ::= <class modifier> | <class modifiers> <class modifier>
-ClassModifier : 'public' | 'abstract' | 'final';//<class modifier> ::= public | abstract | final
-Super : 'extends' ClassType;//<super> ::= extends <class type>
-Interfaces : 'implements' InterfaceTypeList;//<interfaces> ::= implements <interface type list>
-InterfaceTypeList : InterfaceType | InterfaceTypeList ',' InterfaceType;//<interface type list> ::= <interface type> | <interface type list> , <interface type>
-ClassBody : '{' ClassBodyDeclarations? '}';//<class body> ::= { <class body declarations>? }
-ClassBodyDeclarations : ClassBodyDeclaration | ClassBodyDeclarations ClassBodyDeclaration;//<class body declarations> ::= <class body declaration> | <class body declarations> <class body declaration>
-ClassBodyDeclaration : ClassMemberDeclaration | StaticInitializer | ConstructorDeclaration;//<class body declaration> ::= <class member declaration> | <static initializer> | <constructor declaration>
-ClassMemberDeclaration : FieldDeclaration | MethodDeclaration;//<class member declaration> ::= <field declaration> | <method declaration>
-StaticInitializer : 'static' Block;//<static initializer> ::= static <block>
-ConstructorDeclaration : ConstructorModifiers? ConstructorDeclarator Throws? ConstructorBody;//<constructor declaration> ::= <constructor modifiers>? <constructor declarator> <throws>? <constructor body>
-ConstructorModifiers : ConstructorModifier | ConstructorModifiers ConstructorModifier;//<constructor modifiers> ::= <constructor modifier> | <constructor modifiers> <constructor modifier>
-ConstructorModifier : 'public' | 'protected' | 'private';//<constructor modifier> ::= public | protected | private
-ConstructorDeclarator : SimpleTypeName '(' FormalParameterList? ')';//<constructor declarator> ::= <simple type name> ( <formal parameter list>? )
+classModifiers : classModifier | classModifiers classModifier;//<class modifiers> ::= <class modifier> | <class modifiers> <class modifier>
+classModifier : PUBLIC | ABSTRACT | FINAL;//<class modifier> ::= public | abstract | final
+super : EXTENDS classType;//<super> ::= extends <class type>
+interfaces : IMPLEMENTS interfaceTypeList;//<interfaces> ::= implements <interface type list>
+interfaceTypeList : interfaceType | interfaceTypeList Virgula interfaceType;//<interface type list> ::= <interface type> | <interface type list> , <interface type>
+classBody : ACh classBodyDeclarations? FCh;//<class body> ::= { <class body declarations>? }
+classBodyDeclarations : classBodyDeclaration | classBodyDeclarations classBodyDeclaration;//<class body declarations> ::= <class body declaration> | <class body declarations> <class body declaration>
+classBodyDeclaration : classMemberDeclaration | staticInitializer | constructorDeclaration;//<class body declaration> ::= <class member declaration> | <static initializer> | <constructor declaration>
+classMemberDeclaration : fieldDeclaration | methodDeclaration;//<class member declaration> ::= <field declaration> | <method declaration>
+staticInitializer : STATIC block;//<static initializer> ::= static <block>
+constructorDeclaration : constructorModifiers? constructorDeclarator throwsRule? constructorBody;//<constructor declaration> ::= <constructor modifiers>? <constructor declarator> <throws>? <constructor body>
+constructorModifiers : constructorModifier | constructorModifiers constructorModifier;//<constructor modifiers> ::= <constructor modifier> | <constructor modifiers> <constructor modifier>
+constructorModifier : PUBLIC | PROTECTED | PRIVATE;//<constructor modifier> ::= public | protected | private
+constructorDeclarator : simpleTypeName AP formalParameterList? FP;//<constructor declarator> ::= <simple type name> ( <formal parameter list>? )
 formalParameterList : formalParameter | formalParameterList PontoVirgula formalParameter;//<formal parameter list> ::= <formal parameter> | <formal parameter list> , <formal parameter>
 formalParameter : type variableDeclaratorId;//<formal parameter> ::= <type> <variable declarator id>
 throwsRule : THROWS classTypeList;//<throws> ::= throws <class type list>
 classTypeList : classType | classTypeList Virgula classType;//<class type list> ::= <class type> | <class type list> , <class type>
-ConstructorBody :'{' ExplicitConstructorInvocation? BlockStatements? '}';//<constructor body> ::= { <explicit constructor invocation>? <block statements>? }
-ExplicitConstructorInvocation : 'this' '(' ArgumentList? ')' | 'super' '(' ArgumentList? ')';//<explicit constructor invocation>::= this ( <argument list>? ) | super ( <argument list>? )
-FieldDeclaration : FieldModifiers? Type VariableDeclarators ';';//<field declaration> ::= <field modifiers>? <type> <variable declarators> ;
-FieldModifiers : FieldModifier | FieldModifiers FieldModifier;//<field modifiers> ::= <field modifier> | <field modifiers> <field modifier>
-FieldModifier : 'public' | 'protected' | 'private' | 'static' | 'final' | 'transient' | 'volatile';//<field modifier> ::= public | protected | private | static | final | transient | volatile
-VariableDeclarators : VariableDeclarator | VariableDeclarators ',' VariableDeclarator;//<variable declarators> ::= <variable declarator> | <variable declarators> , <variable declarator>
+constructorBody :ACh explicitConstructorInvocation? blockStatements? FCh;//<constructor body> ::= { <explicit constructor invocation>? <block statements>? }
+explicitConstructorInvocation : THIS AP argumentList? FP | SUPER AP argumentList? FP;//<explicit constructor invocation>::= this ( <argument list>? ) | super ( <argument list>? )
+fieldDeclaration : fieldModifiers? type variableDeclarators PontoVirgula;//<field declaration> ::= <field modifiers>? <type> <variable declarators> ;
+fieldModifiers : fieldModifier | fieldModifiers fieldModifier;//<field modifiers> ::= <field modifier> | <field modifiers> <field modifier>
+fieldModifier : PUBLIC | PROTECTED | PRIVATE | STATIC | FINAL | TRANSIENT | VOLATILE;//<field modifier> ::= public | protected | private | static | final | transient | volatile
+variableDeclarators : variableDeclarator | variableDeclarators Virgula variableDeclarator;//<variable declarators> ::= <variable declarator> | <variable declarators> , <variable declarator>
 variableDeclarator : variableDeclaratorId | variableDeclaratorId OpIgualdade variableInitializer;//<variable declarator> ::= <variable declarator id> | <variable declarator id> = <variable initializer>
 variableDeclaratorId : ID | variableDeclaratorId AC FC;//<variable declarator id> ::= <identifier> | <variable declarator id> [ ]
 variableInitializer : expression | arrayInitializer;//<variable initializer> ::= <expression> | <array initializer>
-MethodDeclaration : MethodHeader MethodBody;//<method declaration> ::= <method header> <method body>
-MethodHeader : MethodModifiers? ResultType MethodDeclarator Throws?;//<method header> ::= <method modifiers>? <result type> <method declarator> <throws>?
+methodDeclaration : methodHeader methodBody;//<method declaration> ::= <method header> <method body>
+methodHeader : methodModifiers? resultType methodDeclarator throwsRule?;//<method header> ::= <method modifiers>? <result type> <method declarator> <throws>?
 resultType : type | VOID;//<result type> ::= <type> | void
-MethodModifiers : MethodModifier | MethodModifiers MethodModifier;//<method modifiers> ::= <method modifier> | <method modifiers> <method modifier>
-MethodModifier : 'public' | 'protected' | 'private' | 'static' | 'abstract' | 'final' | 'synchronized' | 'native';//<method modifier> ::= public | protected | private | static | abstract | final | synchronized | native
+methodModifiers : methodModifier | methodModifiers methodModifier;//<method modifiers> ::= <method modifier> | <method modifiers> <method modifier>
+methodModifier : PUBLIC | PROTECTED | PRIVATE | STATIC | ABSTRACT | FINAL | SYNCHRONIZED | NATIVE;//<method modifier> ::= public | protected | private | static | abstract | final | synchronized | native
 methodDeclarator : ID AP formalParameterList? FP;//<method declarator> ::= <identifier> ( <formal parameter list>? )
-MethodBody : Block | ';';//<method body> ::= <block> | ;
+methodBody : block | Virgula;//<method body> ::= <block> | ;
 interfaceDeclaration : interfaceModifiers? INTERFACE ID extendsInterfaces? interfaceBody;//<interface declaration> ::= <interface modifiers>? interface <identifier> <extends interfaces>? <interface body>
 interfaceModifiers : interfaceModifier | interfaceModifiers interfaceModifier;//<interface modifiers> ::= <interface modifier> | <interface modifiers> <interface modifier>
 interfaceModifier : PUBLIC | ABSTRACT;//<interface modifier> ::= public | abstract
@@ -75,45 +81,45 @@ interfaceType : typeName;//<interface type> ::= <type name>
 arrayType : type AC FC;//<array type> ::= <type> [ ]
 
 //Blocks and Commands
-Block : '{' BlockStatements? '}';//<block> ::= { <block statements>? }
-BlockStatements : BlockStatement | BlockStatements BlockStatement;//<block statements> ::= <block statement> | <block statements> <block statement>
-BlockStatement : LocalVariableDeclarationStatement | Statement;//<block statement> ::= <local variable declaration statement> | <statement>
-LocalVariableDeclarationStatement : LocalVariableDeclaration ';';//<local variable declaration statement> ::= <local variable declaration> ;
-LocalVariableDeclaration : Type VariableDeclarators;//<local variable declaration> ::= <type> <variable declarators>
-Statement : StatementWithoutTrailingSubstatement | LabeledStatement | IfThenStatement | IfThenElseStatement | WhileStatement | ForStatement;//<statement> ::= <statement without trailing substatement> | <labeled statement> | <if then statement> | <if then else statement> | <while statement> | <for statement>
-StatementNoShortIf : StatementWithoutTrailingSubstatement | LabeledStatementNoShortIf | IfThenElseStatementNoShortIf | WhileStatementNoShortIf | ForStatementNoShortIf;//<statement no short if> ::= <statement without trailing substatement> | <labeled statement no short if> | <if then else statement no short if> | <while statement no short if> | <for statement no short if>
-StatementWithoutTrailingSubstatement : Block | EmptyStatement | ExpressionStatement | SwitchStatement | DoStatement | BreakStatement | ContinueStatement | ReturnStatement | SynchronizedStatement | ThrowsStatements | TryStatement;//<statement without trailing substatement> ::= <block> | <empty statement> | <expression statement> | <switch statement> | <do statement> | <break statement> | <continue statement> | <return statement> | <synchronized statement> | <throws statements> | <try statement>
-EmptyStatement : ';';//<empty statement> ::= ;
-LabeledStatement : Identifier ':' Statement;//<labeled statement> ::= <identifier> : <statement>
-LabeledStatementNoShortIf : Identifier ':' StatementNoShortIf;//<labeled statement no short if> ::= <identifier> : <statement no short if>
-ExpressionStatement : StatementExpression ';';//<expression statement> ::= <statement expression> ;
-StatementExpression : Assignment | PreincrementExpression | PostincrementExpression | PredecrementExpression | PostdecrementExpression | MethodInvocation | ClassInstanceCreationExpression;//<statement expression> ::= <assignment> | <preincrement expression> | <postincrement expression> | <predecrement expression> | <postdecrement expression> | <method invocation> | <class instance creation expression>
-IfThenStatement : 'if' '(' Expression ')' Statement;//<if then statement>::= if ( <expression> ) <statement>
-IfThenElseStatement : 'if' '(' Expression ')' StatementNoShortIf 'else' Statement;//<if then else statement>::= if ( <expression> ) <statement no short if> else <statement>
-IfThenElseStatementNoShortIf : 'if' '(' Expression ')' StatementNoShortIf 'else' StatementNoShortIf;//<if then else statement no short if> ::= if ( <expression> ) <statement no short if> else <statement no short if>
-SwitchStatement : 'switch' '(' Expression ')' SwitchBlock;//<switch statement> ::= switch ( <expression> ) <switch block>
-SwitchBlock : '{' SwitchBlockStatementGroups? SwitchLabels? '}';//<switch block> ::= { <switch block statement groups>? <switch labels>? }
-SwitchBlockStatementGroups : SwitchBlockStatementGroup | SwitchBlockStatementGroups SwitchBlockStatementGroup;//<switch block statement groups> ::= <switch block statement group> | <switch block statement groups> <switch block statement group>
-SwitchBlockStatementGroup : SwitchLabels BlockStatements;//<switch block statement group> ::= <switch labels> <block statements>
-SwitchLabels : SwitchLabel | SwitchLabels SwitchLabel;//<switch labels> ::= <switch label> | <switch labels> <switch label>
-SwitchLabel : 'case' ConstantExpression ':' | 'default' ':';//<switch label> ::= case <constant expression> : | default :
-WhileStatement : 'while' '(' Expression ')' Statement;//<while statement> ::= while ( <expression> ) <statement>
-WhileStatementNoShortIf : 'while' '(' Expression ')' StatementNoShortIf;//<while statement no short if> ::= while ( <expression> ) <statement no short if>
-DoStatement : 'do' Statement 'while' '(' Expression ')' ';';//<do statement> ::= do <statement> while ( <expression> ) ;
-ForStatement : 'for' '(' ForInit? ';' Expression? ';' ForUpdate? ')' Statement;//<for statement> ::= for ( <for init>? ; <expression>? ; <for update>? ) <statement>
-ForStatementNoShortIf : 'for' '(' ForInit? ';' Expression? ';' ForUpdate? ')' StatementNoShortIf;//<for statement no short if> ::= for ( <for init>? ; <expression>? ; <for update>? ) <statement no short if>
-ForInit : StatementExpressionList | LocalVariableDeclaration;//<for init> ::= <statement expression list> | <local variable declaration>
-ForUpdate : StatementExpressionList;//<for update> ::= <statement expression list>
-StatementExpressionList : StatementExpression | StatementExpressionList ',' StatementExpression;//<statement expression list> ::= <statement expression> | <statement expression list> , <statement expression>
-BreakStatement : 'break' Identifier? ';';//<break statement> ::= break <identifier>? ;
-ContinueStatement : 'continue' Identifier? ';';//<continue statement> ::= continue <identifier>? ;
-ReturnStatement : 'return' Expression? ';';//<return statement> ::= return <expression>? ;
-ThrowsStatement : 'throw' Expression ';';//<throws statement> ::= throw <expression> ;
-SynchronizedStatement : 'synchronized' '(' Expression ')' Block;//<synchronized statement> ::= synchronized ( <expression> ) <block>
-TryStatement : 'try' Block Catches | 'try' Block Catches? Finally;//<try statement> ::= try <block> <catches> | try <block> <catches>? <finally>
-Catches : CatchClause | Catches CatchClause;//<catches> ::= <catch clause> | <catches> <catch clause>
-CatchClause : 'catch' '(' FormalParameter ')' Block;//<catch clause> ::= catch ( <formal parameter> ) <block>
-Finally : 'finally' Block;//<finally > ::= finally <block>
+block : ACh blockStatements? FCh;//<block> ::= { <block statements>? }
+blockStatements : blockStatement | blockStatements blockStatement;//<block statements> ::= <block statement> | <block statements> <block statement>
+blockStatement : localVariableDeclarationStatement | statement;//<block statement> ::= <local variable declaration statement> | <statement>
+localVariableDeclarationStatement : localVariableDeclaration ';';//<local variable declaration statement> ::= <local variable declaration> ;
+localVariableDeclaration : type variableDeclarators;//<local variable declaration> ::= <type> <variable declarators>
+statement : statementWithoutTrailingSubstatement | labeledStatement | ifThenStatement | ifThenElseStatement | whileStatement | forStatement;//<statement> ::= <statement without trailing substatement> | <labeled statement> | <if then statement> | <if then else statement> | <while statement> | <for statement>
+statementNoShortIf : statementWithoutTrailingSubstatement | labeledStatementNoShortIf | ifThenElseStatementNoShortIf | whileStatementNoShortIf | forStatementNoShortIf;//<statement no short if> ::= <statement without trailing substatement> | <labeled statement no short if> | <if then else statement no short if> | <while statement no short if> | <for statement no short if>
+statementWithoutTrailingSubstatement : block | emptyStatement | expressionStatement | switchStatement | doStatement | breakStatement | continueStatement | returnStatement | synchronizedStatement | throwsStatements | tryStatement;//<statement without trailing substatement> ::= <block> | <empty statement> | <expression statement> | <switch statement> | <do statement> | <break statement> | <continue statement> | <return statement> | <synchronized statement> | <throws statements> | <try statement>
+emptyStatement : PontoVirgula;//<empty statement> ::= ;
+labeledStatement : ID DoisPontos statement;//<labeled statement> ::= <identifier> : <statement>
+labeledStatementNoShortIf : ID DoisPontos statementNoShortIf;//<labeled statement no short if> ::= <identifier> : <statement no short if>
+expressionStatement : statementExpression PontoVirgula;//<expression statement> ::= <statement expression> ;
+statementExpression : assignment | preincrementExpression | postincrementExpression | predecrementExpression | postdecrementExpression | methodInvocation | classInstanceCreationExpression;//<statement expression> ::= <assignment> | <preincrement expression> | <postincrement expression> | <predecrement expression> | <postdecrement expression> | <method invocation> | <class instance creation expression>
+ifThenStatement : IF AP expression FP statement;//<if then statement>::= if ( <expression> ) <statement>
+ifThenElseStatement : IF AP expression FP statementNoShortIf ELSE statement;//<if then else statement>::= if ( <expression> ) <statement no short if> else <statement>
+ifThenElseStatementNoShortIf : IF AP expression FP statementNoShortIf ELSE statementNoShortIf;//<if then else statement no short if> ::= if ( <expression> ) <statement no short if> else <statement no short if>
+switchStatement : SWITCH AP expression FP switchBlock;//<switch statement> ::= switch ( <expression> ) <switch block>
+switchBlock : ACh switchBlockStatementGroups? switchLabels? FCh;//<switch block> ::= { <switch block statement groups>? <switch labels>? }
+switchBlockStatementGroups : switchBlockStatementGroup | switchBlockStatementGroups switchBlockStatementGroup;//<switch block statement groups> ::= <switch block statement group> | <switch block statement groups> <switch block statement group>
+switchBlockStatementGroup : switchLabels blockStatements;//<switch block statement group> ::= <switch labels> <block statements>
+switchLabels : switchLabel | switchLabels switchLabel;//<switch labels> ::= <switch label> | <switch labels> <switch label>
+switchLabel : CASE constantExpression DoisPontos | DEFAULT DoisPontos;//<switch label> ::= case <constant expression> : | default :
+whileStatement : WHILE AP expression FP statement;//<while statement> ::= while ( <expression> ) <statement>
+whileStatementNoShortIf : WHILE AP expression FP statementNoShortIf;//<while statement no short if> ::= while ( <expression> ) <statement no short if>
+doStatement : DO statement WHILE AP expression FP PontoVirgula;//<do statement> ::= do <statement> while ( <expression> ) ;
+forStatement : FOR AP forInit? PontoVirgula expression? PontoVirgula forUpdate? FP statement;//<for statement> ::= for ( <for init>? ; <expression>? ; <for update>? ) <statement>
+forStatementNoShortIf : FOR AP forInit? PontoVirgula expression? PontoVirgula forUpdate? FP statementNoShortIf;//<for statement no short if> ::= for ( <for init>? ; <expression>? ; <for update>? ) <statement no short if>
+forInit : statementExpressionList | localVariableDeclaration;//<for init> ::= <statement expression list> | <local variable declaration>
+forUpdate : statementExpressionList;//<for update> ::= <statement expression list>
+statementExpressionList : statementExpression | statementExpressionList Virgula statementExpression;//<statement expression list> ::= <statement expression> | <statement expression list> , <statement expression>
+breakStatement : BREAK ID? PontoVirgula;//<break statement> ::= break <identifier>? ;
+continueStatement : CONTINUE ID? PontoVirgula;//<continue statement> ::= continue <identifier>? ;
+returnStatement : RETURN expression? PontoVirgula;//<return statement> ::= return <expression>? ;
+throwsStatement : THROW expression PontoVirgula;//<throws statement> ::= throw <expression> ;
+synchronizedStatement : SYNCHRONIZED AP expression FP block;//<synchronized statement> ::= synchronized ( <expression> ) <block>
+tryStatement : TRY block catches | TRY block catches? finallyRule;//<try statement> ::= try <block> <catches> | try <block> <catches>? <finally>
+catches : catchClause | catches catchClause;//<catches> ::= <catch clause> | <catches> <catch clause>
+catchClause : CATCH AP formalParameter FP block;//<catch clause> ::= catch ( <formal parameter> ) <block>
+finallyRule : FINALLY block;//<finally > ::= finally <block>
 
 //Expressions
 constantExpression : expression;//<constant expression> ::= <expression>
@@ -160,40 +166,16 @@ simpleTypeName : ID;//<simple type name> ::= <identifier>
 expressionName : ID | ambiguousName Ponto ID;//<expression name> ::= <identifier> | <ambiguous name> . <identifier>
 methodName : ID | ambiguousName Ponto ID;//<method name> ::= <identifier> | <ambiguous name>. <identifier>
 ambiguousName : ID | ambiguousName Ponto ID;//<ambiguous name>::= <identifier> | <ambiguous name>. <identifier>
-literal : integerLiteral | floatingPointLiteral | booleanLiteral | characterLiteral | stringLiteral | nullLiteral;//<literal> ::= <integer literal> | <floating-point literal> | <boolean literal> | <character literal> | <string literal> | <null literal>
-IntegerLiteral : DecimalIntegerLiteral | HexIntegerLiteral | OctalIntegerLiteral;//<integer literal> ::= <decimal integer literal> | <hex integer literal> | <octal integer literal>
-DecimalIntegerLiteral : DecimalNumeral IntegerTypeSuffix?;//<decimal integer literal> ::= <decimal numeral> <integer type suffix>?
-HexIntegerLiteral : HexNumeral IntegerTypeSuffix?;//<hex integer literal> ::= <hex numeral> <integer type suffix>?
-OctalIntegerLiteral : OctalNumeral IntegerTypeSuffix?;//<octal integer literal> ::= <octal numeral> <integer type suffix>?
-IntegerTypeSuffix : 'l' | 'L';//<integer type suffix> ::= l | L
-DecimalNumeral : '0' | NonZeroDigit Digits?;//<decimal numeral> ::= 0 | <non zero digit> <digits>?
-Digits : Digit | Digits Digit;//<digits> ::= <digit> | <digits> <digit>
-Digit : '0' | NonZeroDigit;//<digit> ::= 0 | <non zero digit>
-NonZeroDigit : '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';//<non zero digit> ::= 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-HexNumeral : '0' 'x' HexDigit | '0' 'X' HexDigit | HexNumeral HexDigit;//<hex numeral> ::= 0 x <hex digit> | 0 X <hex digit> | <hex numeral> <hex digit>
-HexDigit : '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F';//<hex digit> :: = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | a | b | c | d | e | f | A | B | C | D | E | F
-OctalNumeral : '0' OctalDigit | OctalNumeral OctalDigit;//<octal numeral> ::= 0 <octal digit> | <octal numeral> <octal digit>
-OctalDigit : '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7';//<octal digit> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
-FloatingPointLiteral : Digits '.' Digits? ExponentPart? FloatTypeSuffix?;//<floating-point literal> ::= <digits> . <digits>? <exponent part>? <float type suffix>?
-//<digits> <exponent part>? <float type suffix>?
-ExponentPart : ExponentIndicator SignedInteger;//<exponent part> ::= <exponent indicator> <signed integer>
-ExponentIndicator : 'e' | 'E';//<exponent indicator> ::= e | E
-SignedInteger : Sign? Digits;//<signed integer> ::= <sign>? <digits>
-Sign : '+' | '-';//<sign> ::= + | -
-FloatTypeSuffix : 'f' | 'F' | 'd' | 'D';//<float type suffix> ::= f | F | d | D
-BooleanLiteral : 'true' | 'false';//<boolean literal> ::= true | false
-CharacterLiteral : '\'' SingleCharacter '\'' | '\'' EscapeSequence '\'';//<character literal> ::= ' <single character> ' | ' <escape sequence> '
-SingleCharacter : InputCharacter ~('\'' | '\\');//<single character> ::= <input character> except ' and \
-StringLiteral : '"' StringCharacters?'"';//<string literal> ::= " <string characters>?"
-StringCharacters : StringCharacter | StringCharacters StringCharacter;//<string characters> ::= <string character> | <string characters> <string character>
-StringCharacter : InputCharacter ~('"' | '\\') | EscapeSequence;//<string character> ::= <input character> except " and \ | <escape character>
-NullLiteral : 'null';//<null literal> ::= null
+literal : integerLiteral | floatingPointLiteral | booleanLiteral | Character | String | NULL;//<literal> ::= <integer literal> | <floating-point literal> | <boolean literal> | <character literal> | <string literal> | <null literal>
+integerLiteral : DecimalNumeral | HexNumeral | OctalNumeral;
+floatingPointLiteral : FloatNumeral | DoubleNumeral;
+booleanLiteral : TRUE | FALSE;//<boolean literal> ::= true | false
 
-
-
-
-
-
+/*
+*
+*ANALISADOR LEXICO
+*
+*/
 
 // Palavras reservadas
 ABSTRACT : 'abstract';
@@ -306,7 +288,7 @@ EscapeSequence : '\\''t' | '\\''b' | '\\''n' | '\\''r' | '\\''f' | '\\''\'' | '\
 DecimalNumeral : '0' ('l' | 'L')? | NonZeroDigit Digit* ('l' | 'L')?;
 OctalNumeral : '0' OctalDigit* ('l' | 'L')?;
 HexNumeral : '0x' HexDigit* ('l' | 'L')? | '0X' HexDigit* ('l' | 'L')?;
-//FloatNumeral : Digit+ (((('.' Digit+)? (('e' | 'E') Digit+)?) ('f' | 'F')?) | ('.' ('f' | 'F')) | (('.' ('e' | 'E') Digit+) ('f' | 'F')?));
+FloatNumeral : Digit+ (((('.' Digit+)? (('e' | 'E') Digit+)?) ('f' | 'F')?) | ('.' ('f' | 'F')) | (('.' ('e' | 'E') Digit+) ('f' | 'F')?));
 DoubleNumeral : Digit+ (((('.' Digit+)? (('e' | 'E') Digit+)?) ('f' | 'F' | 'd' | 'D')?) | ('.' ('f' | 'F' | 'd' | 'D')) | (('.' ('e' | 'E') Digit+) ('f' | 'F' | 'd' | 'D')?));
 Character : '\''~('"' | '\\')'\'' | '\'' EscapeSequence '\'';
 String : '"'(~('"' | '\\') | EscapeSequence)*'"';
