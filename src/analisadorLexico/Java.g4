@@ -17,10 +17,10 @@ singleTypeImportDeclaration : IMPORT typeName PontoVirgula;//<single type import
 typeImportOnDemandDeclaration : IMPORT packageName Ponto OpMulti PontoVirgula;//<type import on demand declaration> ::= import <package name> . * ;
 typeDeclarations : typeDeclaration | typeDeclarations typeDeclaration;//<type declarations> ::= <type declaration> | <type declarations> <type declaration>
 typeDeclaration : classDeclaration | interfaceDeclaration | PontoVirgula;//<type declaration> ::= <class declaration> | <interface declaration> | ;
-classDeclaration : classModifiers? CLASS ID super? interfaces? classBody;//<class declaration> ::= <class modifiers>? class <identifier> <super>? <interfaces>? <class body>
+classDeclaration : classModifiers? CLASS ID superRule? interfaces? classBody;//<class declaration> ::= <class modifiers>? class <identifier> <super>? <interfaces>? <class body>
 classModifiers : classModifier | classModifiers classModifier;//<class modifiers> ::= <class modifier> | <class modifiers> <class modifier>
 classModifier : PUBLIC | ABSTRACT | FINAL;//<class modifier> ::= public | abstract | final
-super : EXTENDS classType;//<super> ::= extends <class type>
+superRule : EXTENDS classType;//<super> ::= extends <class type>
 interfaces : IMPLEMENTS interfaceTypeList;//<interfaces> ::= implements <interface type list>
 interfaceTypeList : interfaceType | interfaceTypeList Virgula interfaceType;//<interface type list> ::= <interface type> | <interface type list> , <interface type>
 classBody : ACh classBodyDeclarations? FCh;//<class body> ::= { <class body declarations>? }
@@ -42,7 +42,7 @@ fieldDeclaration : fieldModifiers? type variableDeclarators PontoVirgula;//<fiel
 fieldModifiers : fieldModifier | fieldModifiers fieldModifier;//<field modifiers> ::= <field modifier> | <field modifiers> <field modifier>
 fieldModifier : PUBLIC | PROTECTED | PRIVATE | STATIC | FINAL | TRANSIENT | VOLATILE;//<field modifier> ::= public | protected | private | static | final | transient | volatile
 variableDeclarators : variableDeclarator | variableDeclarators Virgula variableDeclarator;//<variable declarators> ::= <variable declarator> | <variable declarators> , <variable declarator>
-variableDeclarator : variableDeclaratorId | variableDeclaratorId OpIgualdade variableInitializer;//<variable declarator> ::= <variable declarator id> | <variable declarator id> = <variable initializer>
+variableDeclarator : variableDeclaratorId | variableDeclaratorId OpAtribuicao variableInitializer;//<variable declarator> ::= <variable declarator id> | <variable declarator id> = <variable initializer>
 variableDeclaratorId : ID | variableDeclaratorId AC FC;//<variable declarator id> ::= <identifier> | <variable declarator id> [ ]
 variableInitializer : expression | arrayInitializer;//<variable initializer> ::= <expression> | <array initializer>
 methodDeclaration : methodHeader methodBody;//<method declaration> ::= <method header> <method body>
@@ -68,8 +68,7 @@ arrayInitializer : ACh variableInitializers? Virgula Interrogacao FCh;//<array i
 variableInitializers : variableInitializer | variableInitializers Virgula variableInitializer;//<variable initializers> ::= <variable initializer> | <variable initializers> , <variable initializer>
 
 //Types
-//verificar recursão indireta no arrayType
-type : primitiveType | referenceType;//<type> ::= <primitive type> | <reference type>
+type : primitiveType | classOrInterfaceType | type AC FC;//<type> ::= <primitive type> | <reference type>
 primitiveType : numericType | BOOLEAN;//<primitive type> ::= <numeric type> | boolean
 numericType : integralType | floatingPointType;//<numeric type> ::= <integral type> | <floating-point type>
 integralType : BYTE | SHORT | INT | LONG | CHAR;//<integral type> ::= byte | short | int | long | char
@@ -127,7 +126,7 @@ expression : assignmentExpression;//<expression> ::= <assignment expression>
 assignmentExpression : conditionalExpression | assignment;//<assignment expression> ::= <conditional expression> | <assignment>
 assignment : leftHandSide assignmentOperator assignmentExpression;//<assignment> ::= <left hand side> <assignment operator> <assignment expression>
 leftHandSide : expressionName | fieldAccess | arrayAccess;//<left hand side> ::= <expression name> | <field access> | <array access>
-assignmentOperator : OpIgualdade | OpMultiAtribuicao | OpDivAtribuicao | OpRestoAtribuicao | OpSomaAtribuicao | OpSubAtribuicao | OpLeftAtribuicao | OpRightAtribuicao | OpRightZeroAtribuicao | OpANDAtribuicao | OpXORAtribuicao | OpORAtribuicao;//<assignment operator> ::= = | *= | /= | %= | += | -= | <<= | >>= | >>>= | &= | ^= | |=
+assignmentOperator : OpAtribuicao | OpMultiAtribuicao | OpDivAtribuicao | OpRestoAtribuicao | OpSomaAtribuicao | OpSubAtribuicao | OpLeftAtribuicao | OpRightAtribuicao | OpRightZeroAtribuicao | OpANDAtribuicao | OpXORAtribuicao | OpORAtribuicao;//<assignment operator> ::= = | *= | /= | %= | += | -= | <<= | >>= | >>>= | &= | ^= | |=
 conditionalExpression : conditionalOrExpression | conditionalOrExpression Interrogacao expression DoisPontos conditionalExpression;//<conditional expression> ::= <conditional or expression> | <conditional or expression> ? <expression> : <conditional expression>
 conditionalOrExpression : conditionalAndExpression | conditionalOrExpression OpOR conditionalAndExpression;//<conditional or expression> ::= <conditional and expression> | <conditional or expression> || <conditional and expression>
 conditionalAndExpression : inclusiveOrExpression | conditionalAndExpression OpAND inclusiveOrExpression;//<conditional and expression> ::= <inclusive or expression> | <conditional and expression> && <inclusive or expression>
@@ -146,11 +145,11 @@ preincrementExpression : Incremento unaryExpression;//<preincrement expression> 
 unaryExpressionNotPlusMinus : postfixExpression | OpBitComp unaryExpression | OpNOT unaryExpression | castExpression;//<unary expression not plus minus> ::= <postfix expression> | ~ <unary expression> | ! <unary expression> | <cast expression>
 postdecrementExpression : postfixExpression Decremento;//<postdecrement expression> ::= <postfix expression> --
 postincrementExpression : postfixExpression Incremento;//<postincrement expression> ::= <postfix expression> ++
-postfixExpression : primary | expressionName | postincrementExpression | postdecrementExpression;//<postfix expression> ::= <primary> | <expression name> | <postincrement expression> | <postdecrement expression>
+postfixExpression : primary | expressionName | postfixExpression Incremento |  postfixExpression Decremento;//<postfix expression> ::= <primary> | <expression name> | <postincrement expression> | <postdecrement expression>
 methodInvocation : methodName AP argumentList? FP | primary Ponto ID AP argumentList? FP | SUPER Ponto ID AP argumentList? FP;//<method invocation> ::= <method name> ( <argument list>? ) | <primary> . <identifier> ( <argument list>? ) | super . <identifier> ( <argument list>? )
-fieldAccess : primary Ponto ID| SUPER Ponto ID;//<field access> ::= <primary> . <identifier> | super . <identifier>
-primary : primaryNoNewArray | arrayCreationExpression;//<primary> ::= <primary no new array> | <array creation expression>
-primaryNoNewArray : literal | THIS | AP expression FP | classInstanceCreationExpression | fieldAccess | methodInvocation | arrayAccess;//<primary no new array> ::= <literal> | this | ( <expression> ) | <class instance creation expression> | <field access> | <method invocation> | <array access>
+fieldAccess : primary Ponto ID | SUPER Ponto ID;//<field access> ::= <primary> . <identifier> | super . <identifier>
+primary : methodName AP argumentList? FP | primary Ponto ID AP argumentList? FP | SUPER Ponto ID AP argumentList? FP | primaryNoNewArray | primary Ponto ID | SUPER Ponto ID | arrayCreationExpression;//<primary> ::= <primary no new array> | <array creation expression>
+primaryNoNewArray : literal | THIS | AP expression FP | classInstanceCreationExpression | expressionName AC expression FC | primaryNoNewArray AC expression FC;//<primary no new array> ::= <literal> | this | ( <expression> ) | <class instance creation expression> | <field access> | <method invocation> | <array access>
 classInstanceCreationExpression : NEW classType AP argumentList? FP;//<class instance creation expression> ::= new <class type> ( <argument list>? )
 argumentList : expression | argumentList Virgula expression;//<argument list> ::= <expression> | <argument list> , <expression>
 arrayCreationExpression : NEW primitiveType dimExprs dims? | NEW classOrInterfaceType dimExprs dims?;//<array creation expression> ::= new <primitive type> <dim exprs> <dims>? | new <class or interface type> <dim exprs> <dims>?
