@@ -25,16 +25,14 @@ interfaces : IMPLEMENTS interfaceTypeList;//<interfaces> ::= implements <interfa
 interfaceTypeList : interfaceType | interfaceTypeList Virgula interfaceType;//<interface type list> ::= <interface type> | <interface type list> , <interface type>
 classBody : ACh classBodyDeclarations? FCh;//<class body> ::= { <class body declarations>? }
 classBodyDeclarations : classBodyDeclaration | classBodyDeclarations classBodyDeclaration;//<class body declarations> ::= <class body declaration> | <class body declarations> <class body declaration>
-classBodyDeclaration : classMemberDeclaration | staticInitializer | constructorDeclaration;//<class body declaration> ::= <class member declaration> | <static initializer> | <constructor declaration>
+classBodyDeclaration : classMemberDeclaration | constructorDeclaration;//<class body declaration> ::= <class member declaration> | <static initializer> | <constructor declaration>
 classMemberDeclaration : fieldDeclaration | methodDeclaration;//<class member declaration> ::= <field declaration> | <method declaration>
-staticInitializer : STATIC block;//<static initializer> ::= static <block>
-constructorDeclaration : constructorModifiers? constructorDeclarator throwsRule? constructorBody;//<constructor declaration> ::= <constructor modifiers>? <constructor declarator> <throws>? <constructor body>
+constructorDeclaration : constructorModifiers? constructorDeclarator constructorBody;//<constructor declaration> ::= <constructor modifiers>? <constructor declarator> <throws>? <constructor body>
 constructorModifiers : constructorModifier | constructorModifiers constructorModifier;//<constructor modifiers> ::= <constructor modifier> | <constructor modifiers> <constructor modifier>
 constructorModifier : PUBLIC | PROTECTED | PRIVATE;//<constructor modifier> ::= public | protected | private
 constructorDeclarator : simpleTypeName AP formalParameterList? FP;//<constructor declarator> ::= <simple type name> ( <formal parameter list>? )
 formalParameterList : formalParameter | formalParameterList PontoVirgula formalParameter;//<formal parameter list> ::= <formal parameter> | <formal parameter list> , <formal parameter>
 formalParameter : type variableDeclaratorId;//<formal parameter> ::= <type> <variable declarator id>
-throwsRule : THROWS classTypeList;//<throws> ::= throws <class type list>
 classTypeList : classType | classTypeList Virgula classType;//<class type list> ::= <class type> | <class type list> , <class type>
 constructorBody :ACh explicitConstructorInvocation? blockStatements? FCh;//<constructor body> ::= { <explicit constructor invocation>? <block statements>? }
 explicitConstructorInvocation : THIS AP argumentList? FP | SUPER AP argumentList? FP;//<explicit constructor invocation>::= this ( <argument list>? ) | super ( <argument list>? )
@@ -46,8 +44,8 @@ variableDeclarator : variableDeclaratorId | variableDeclaratorId OpAtribuicao va
 variableDeclaratorId : ID | variableDeclaratorId AC FC;//<variable declarator id> ::= <identifier> | <variable declarator id> [ ]
 variableInitializer : expression | arrayInitializer;//<variable initializer> ::= <expression> | <array initializer>
 methodDeclaration : methodHeader methodBody;//<method declaration> ::= <method header> <method body>
-methodHeader : methodModifiers? resultType methodDeclarator throwsRule?;//<method header> ::= <method modifiers>? <result type> <method declarator> <throws>?
-resultType : type | VOID;//<result type> ::= <type> | void
+methodHeader : methodModifiers? resultType methodDeclarator;//<method header> ::= <method modifiers>? <result type> <method declarator> <throws>?
+resultType : type;//<result type> ::= <type> | void
 methodModifiers : methodModifier | methodModifiers methodModifier;//<method modifiers> ::= <method modifier> | <method modifiers> <method modifier>
 methodModifier : PUBLIC | PROTECTED | PRIVATE | STATIC | ABSTRACT | FINAL | SYNCHRONIZED | NATIVE;//<method modifier> ::= public | protected | private | static | abstract | final | synchronized | native
 methodDeclarator : ID AP formalParameterList? FP;//<method declarator> ::= <identifier> ( <formal parameter list>? )
@@ -61,7 +59,7 @@ interfaceMemberDeclarations : interfaceMemberDeclaration | interfaceMemberDeclar
 interfaceMemberDeclaration : constantDeclaration | abstractMethodDeclaration;//<interface member declaration> ::= <constant declaration> | <abstract method declaration>
 constantDeclaration : constantModifiers type variableDeclarator;//<constant declaration> ::= <constant modifiers> <type> <variable declarator>
 constantModifiers : PUBLIC | STATIC | FINAL;//<constant modifiers> ::= public | static | final
-abstractMethodDeclaration : abstractMethodModifiers? resultType methodDeclarator throwsRule? PontoVirgula;//<abstract method declaration>::= <abstract method modifiers>? <result type> <method declarator> <throws>? ;
+abstractMethodDeclaration : abstractMethodModifiers? resultType methodDeclarator PontoVirgula;//<abstract method declaration>::= <abstract method modifiers>? <result type> <method declarator> <throws>? ;
 abstractMethodModifiers : abstractMethodModifier | abstractMethodModifiers abstractMethodModifier;//<abstract method modifiers> ::= <abstract method modifier> | <abstract method modifiers> <abstract method modifier>
 abstractMethodModifier : PUBLIC | ABSTRACT;//<abstract method modifier> ::= public | abstract
 arrayInitializer : ACh variableInitializers? Virgula Interrogacao FCh;//<array initializer> ::= { <variable initializers>? , ? }
@@ -85,23 +83,20 @@ blockStatements : blockStatement | blockStatements blockStatement;//<block state
 blockStatement : localVariableDeclarationStatement | statement;//<block statement> ::= <local variable declaration statement> | <statement>
 localVariableDeclarationStatement : localVariableDeclaration ';';//<local variable declaration statement> ::= <local variable declaration> ;
 localVariableDeclaration : type variableDeclarators;//<local variable declaration> ::= <type> <variable declarators>
-statement : statementWithoutTrailingSubstatement | labeledStatement | ifThenStatement | ifThenElseStatement | whileStatement | forStatement;//<statement> ::= <statement without trailing substatement> | <labeled statement> | <if then statement> | <if then else statement> | <while statement> | <for statement>
-statementNoShortIf : statementWithoutTrailingSubstatement | labeledStatementNoShortIf | ifThenElseStatementNoShortIf | whileStatementNoShortIf | forStatementNoShortIf;//<statement no short if> ::= <statement without trailing substatement> | <labeled statement no short if> | <if then else statement no short if> | <while statement no short if> | <for statement no short if>
+statement : statementWithoutTrailingSubstatement | labeledStatement | ifThenStatement | whileStatement | forStatement;//<statement> ::= <statement without trailing substatement> | <labeled statement> | <if then statement> | <if then else statement> | <while statement> | <for statement>
+statementNoShortIf : statementWithoutTrailingSubstatement | labeledStatementNoShortIf | whileStatementNoShortIf | forStatementNoShortIf;//<statement no short if> ::= <statement without trailing substatement> | <labeled statement no short if> | <if then else statement no short if> | <while statement no short if> | <for statement no short if>
 statementWithoutTrailingSubstatement : block | emptyStatement | expressionStatement | switchStatement | doStatement | breakStatement | continueStatement | returnStatement | synchronizedStatement | throwsStatement | tryStatement;//<statement without trailing substatement> ::= <block> | <empty statement> | <expression statement> | <switch statement> | <do statement> | <break statement> | <continue statement> | <return statement> | <synchronized statement> | <throws statements> | <try statement>
 emptyStatement : PontoVirgula;//<empty statement> ::= ;
 labeledStatement : ID DoisPontos statement;//<labeled statement> ::= <identifier> : <statement>
 labeledStatementNoShortIf : ID DoisPontos statementNoShortIf;//<labeled statement no short if> ::= <identifier> : <statement no short if>
 expressionStatement : statementExpression PontoVirgula;//<expression statement> ::= <statement expression> ;
-statementExpression : assignment | preincrementExpression | postincrementExpression | predecrementExpression | postdecrementExpression | methodInvocation | classInstanceCreationExpression;//<statement expression> ::= <assignment> | <preincrement expression> | <postincrement expression> | <predecrement expression> | <postdecrement expression> | <method invocation> | <class instance creation expression>
+statementExpression : assignment | postincrementExpression | postdecrementExpression | methodInvocation | classInstanceCreationExpression;//<statement expression> ::= <assignment> | <preincrement expression> | <postincrement expression> | <predecrement expression> | <postdecrement expression> | <method invocation> | <class instance creation expression>
 ifThenStatement : IF AP expression FP statement;//<if then statement>::= if ( <expression> ) <statement>
-ifThenElseStatement : IF AP expression FP statementNoShortIf ELSE statement;//<if then else statement>::= if ( <expression> ) <statement no short if> else <statement>
-ifThenElseStatementNoShortIf : IF AP expression FP statementNoShortIf ELSE statementNoShortIf;//<if then else statement no short if> ::= if ( <expression> ) <statement no short if> else <statement no short if>
 switchStatement : SWITCH AP expression FP switchBlock;//<switch statement> ::= switch ( <expression> ) <switch block>
 switchBlock : ACh switchBlockStatementGroups? switchLabels? FCh;//<switch block> ::= { <switch block statement groups>? <switch labels>? }
 switchBlockStatementGroups : switchBlockStatementGroup | switchBlockStatementGroups switchBlockStatementGroup;//<switch block statement groups> ::= <switch block statement group> | <switch block statement groups> <switch block statement group>
 switchBlockStatementGroup : switchLabels blockStatements;//<switch block statement group> ::= <switch labels> <block statements>
-switchLabels : switchLabel | switchLabels switchLabel;//<switch labels> ::= <switch label> | <switch labels> <switch label>
-switchLabel : CASE constantExpression DoisPontos | DEFAULT DoisPontos;//<switch label> ::= case <constant expression> : | default :
+switchLabels : SWITCH;//<switch labels> ::= <switch label> | <switch labels> <switch label>
 whileStatement : WHILE AP expression FP statement;//<while statement> ::= while ( <expression> ) <statement>
 whileStatementNoShortIf : WHILE AP expression FP statementNoShortIf;//<while statement no short if> ::= while ( <expression> ) <statement no short if>
 doStatement : DO statement WHILE AP expression FP PontoVirgula;//<do statement> ::= do <statement> while ( <expression> ) ;
@@ -115,17 +110,14 @@ continueStatement : CONTINUE ID? PontoVirgula;//<continue statement> ::= continu
 returnStatement : RETURN expression? PontoVirgula;//<return statement> ::= return <expression>? ;
 throwsStatement : THROW expression PontoVirgula;//<throws statement> ::= throw <expression> ;
 synchronizedStatement : SYNCHRONIZED AP expression FP block;//<synchronized statement> ::= synchronized ( <expression> ) <block>
-tryStatement : TRY block catches | TRY block catches? finallyRule;//<try statement> ::= try <block> <catches> | try <block> <catches>? <finally>
+tryStatement : TRY block catches | TRY block catches?;//<try statement> ::= try <block> <catches> | try <block> <catches>? <finally>
 catches : catchClause | catches catchClause;//<catches> ::= <catch clause> | <catches> <catch clause>
 catchClause : CATCH AP formalParameter FP block;//<catch clause> ::= catch ( <formal parameter> ) <block>
-finallyRule : FINALLY block;//<finally > ::= finally <block>
 
 //Expressions
-constantExpression : expression;//<constant expression> ::= <expression>
 expression : assignmentExpression;//<expression> ::= <assignment expression>
 assignmentExpression : conditionalExpression | assignment;//<assignment expression> ::= <conditional expression> | <assignment>
-assignment : leftHandSide assignmentOperator assignmentExpression;//<assignment> ::= <left hand side> <assignment operator> <assignment expression>
-leftHandSide : expressionName | fieldAccess | arrayAccess;//<left hand side> ::= <expression name> | <field access> | <array access>
+assignment : assignmentOperator assignmentExpression;//<assignment> ::= <left hand side> <assignment operator> <assignment expression>
 assignmentOperator : OpAtribuicao | OpMultiAtribuicao | OpDivAtribuicao | OpRestoAtribuicao | OpSomaAtribuicao | OpSubAtribuicao | OpLeftAtribuicao | OpRightAtribuicao | OpRightZeroAtribuicao | OpANDAtribuicao | OpXORAtribuicao | OpORAtribuicao;//<assignment operator> ::= = | *= | /= | %= | += | -= | <<= | >>= | >>>= | &= | ^= | |=
 conditionalExpression : conditionalOrExpression | conditionalOrExpression Interrogacao expression DoisPontos conditionalExpression;//<conditional expression> ::= <conditional or expression> | <conditional or expression> ? <expression> : <conditional expression>
 conditionalOrExpression : conditionalAndExpression | conditionalOrExpression OpOR conditionalAndExpression;//<conditional or expression> ::= <conditional and expression> | <conditional or expression> || <conditional and expression>
@@ -139,16 +131,13 @@ shiftExpression : additiveExpression | shiftExpression OpShitLeft additiveExpres
 additiveExpression : multiplicativeExpression | additiveExpression OpSoma multiplicativeExpression | additiveExpression OpSub multiplicativeExpression;//<additive expression> ::= <multiplicative expression> | <additive expression> + <multiplicative expression> | <additive expression> - <multiplicative expression>
 multiplicativeExpression : unaryExpression | multiplicativeExpression OpMulti unaryExpression | multiplicativeExpression OpDiv unaryExpression | multiplicativeExpression OpResto unaryExpression;//<multiplicative expression> ::= <unary expression> | <multiplicative expression> * <unary expression> | <multiplicative expression> / <unary expression> | <multiplicative expression> % <unary expression>
 castExpression : AP primitiveType FP unaryExpression | AP referenceType FP unaryExpressionNotPlusMinus;//<cast expression> ::= ( <primitive type> ) <unary expression> | ( <reference type> ) <unary expression not plus minus>
-unaryExpression : preincrementExpression | predecrementExpression | OpSoma unaryExpression | OpSub unaryExpression | unaryExpressionNotPlusMinus;//<unary expression> ::= <preincrement expression> | <predecrement expression> | + <unary expression> | - <unary expression> | <unary expression not plus minus>
-predecrementExpression : Decremento unaryExpression;//<predecrement expression> ::= -- <unary expression>
-preincrementExpression : Incremento unaryExpression;//<preincrement expression> ::= ++ <unary expression>
+unaryExpression : | OpSoma unaryExpression | OpSub unaryExpression | unaryExpressionNotPlusMinus;//<unary expression> ::= <preincrement expression> | <predecrement expression> | + <unary expression> | - <unary expression> | <unary expression not plus minus>
 unaryExpressionNotPlusMinus : postfixExpression | OpBitComp unaryExpression | OpNOT unaryExpression | castExpression;//<unary expression not plus minus> ::= <postfix expression> | ~ <unary expression> | ! <unary expression> | <cast expression>
 postdecrementExpression : postfixExpression Decremento;//<postdecrement expression> ::= <postfix expression> --
 postincrementExpression : postfixExpression Incremento;//<postincrement expression> ::= <postfix expression> ++
 postfixExpression : primary | expressionName | postfixExpression Incremento |  postfixExpression Decremento;//<postfix expression> ::= <primary> | <expression name> | <postincrement expression> | <postdecrement expression>
-methodInvocation : methodName AP argumentList? FP | primary Ponto ID AP argumentList? FP | SUPER Ponto ID AP argumentList? FP;//<method invocation> ::= <method name> ( <argument list>? ) | <primary> . <identifier> ( <argument list>? ) | super . <identifier> ( <argument list>? )
-fieldAccess : primary Ponto ID | SUPER Ponto ID;//<field access> ::= <primary> . <identifier> | super . <identifier>
-primary : methodName AP argumentList? FP | primary Ponto ID AP argumentList? FP | SUPER Ponto ID AP argumentList? FP | primaryNoNewArray | primary Ponto ID | SUPER Ponto ID | arrayCreationExpression;//<primary> ::= <primary no new array> | <array creation expression>
+methodInvocation : AP argumentList? FP | primary Ponto ID AP argumentList? FP | SUPER Ponto ID AP argumentList? FP;//<method invocation> ::= <method name> ( <argument list>? ) | <primary> . <identifier> ( <argument list>? ) | super . <identifier> ( <argument list>? )
+primary : AP argumentList? FP | primary Ponto ID AP argumentList? FP | SUPER Ponto ID AP argumentList? FP | primaryNoNewArray | primary Ponto ID | SUPER Ponto ID | arrayCreationExpression;//<primary> ::= <primary no new array> | <array creation expression>
 primaryNoNewArray : literal | THIS | AP expression FP | classInstanceCreationExpression | expressionName AC expression FC | primaryNoNewArray AC expression FC;//<primary no new array> ::= <literal> | this | ( <expression> ) | <class instance creation expression> | <field access> | <method invocation> | <array access>
 classInstanceCreationExpression : NEW classType AP argumentList? FP;//<class instance creation expression> ::= new <class type> ( <argument list>? )
 argumentList : expression | argumentList Virgula expression;//<argument list> ::= <expression> | <argument list> , <expression>
@@ -156,15 +145,12 @@ arrayCreationExpression : NEW primitiveType dimExprs dims? | NEW classOrInterfac
 dimExprs : dimExpr | dimExprs dimExpr;//<dim exprs> ::= <dim expr> | <dim exprs> <dim expr>
 dimExpr : AC expression FC;//<dim expr> ::= [ <expression> ]
 dims : AC FC | dims AC FC;//<dims> ::= [ ] | <dims> [ ]
-arrayAccess : expressionName AC expression FC | primaryNoNewArray AC expression FC;//<array access> ::= <expression name> [ <expression> ] | <primary no new array> [ <expression>]
 
 //Tokens
 packageName : ID | packageName Ponto ID;//<package name> ::= <identifier> | <package name> . <identifier>
 typeName : ID | packageName Ponto ID;//<type name> ::= <identifier> | <package name> . <identifier>
 simpleTypeName : ID;//<simple type name> ::= <identifier>
-expressionName : ID | ambiguousName Ponto ID;//<expression name> ::= <identifier> | <ambiguous name> . <identifier>
-methodName : ID | ambiguousName Ponto ID;//<method name> ::= <identifier> | <ambiguous name>. <identifier>
-ambiguousName : ID | ambiguousName Ponto ID;//<ambiguous name>::= <identifier> | <ambiguous name>. <identifier>
+expressionName : ID | Ponto ID;//<expression name> ::= <identifier> | <ambiguous name> . <identifier>
 literal : integerLiteral | floatingPointLiteral | booleanLiteral | Character | String | NULL;//<literal> ::= <integer literal> | <floating-point literal> | <boolean literal> | <character literal> | <string literal> | <null literal>
 integerLiteral : DecimalNumeral | HexNumeral | OctalNumeral;
 floatingPointLiteral : FloatNumeral | DoubleNumeral;

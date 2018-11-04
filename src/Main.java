@@ -21,6 +21,7 @@ public class Main {
         JavaParser parser = new JavaParser(allTokensGenerated);
         ParseTree tree = parser.compilationUnit();
 
+
 //        List<Token> listaTokens = allTokensGenerated.getTokens();
 //
 //        System.out.println("+============Lista de Lexemas============+");

@@ -232,18 +232,6 @@ public class JavaBaseListener implements JavaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStaticInitializer(JavaParser.StaticInitializerContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitStaticInitializer(JavaParser.StaticInitializerContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterConstructorDeclaration(JavaParser.ConstructorDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -311,18 +299,6 @@ public class JavaBaseListener implements JavaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFormalParameter(JavaParser.FormalParameterContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterThrowsRule(JavaParser.ThrowsRuleContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitThrowsRule(JavaParser.ThrowsRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -988,30 +964,6 @@ public class JavaBaseListener implements JavaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIfThenElseStatement(JavaParser.IfThenElseStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIfThenElseStatement(JavaParser.IfThenElseStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterIfThenElseStatementNoShortIf(JavaParser.IfThenElseStatementNoShortIfContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIfThenElseStatementNoShortIf(JavaParser.IfThenElseStatementNoShortIfContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterSwitchStatement(JavaParser.SwitchStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1067,18 +1019,6 @@ public class JavaBaseListener implements JavaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSwitchLabels(JavaParser.SwitchLabelsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSwitchLabel(JavaParser.SwitchLabelContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSwitchLabel(JavaParser.SwitchLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1276,30 +1216,6 @@ public class JavaBaseListener implements JavaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFinallyRule(JavaParser.FinallyRuleContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFinallyRule(JavaParser.FinallyRuleContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterConstantExpression(JavaParser.ConstantExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitConstantExpression(JavaParser.ConstantExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterExpression(JavaParser.ExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1331,18 +1247,6 @@ public class JavaBaseListener implements JavaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAssignment(JavaParser.AssignmentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterLeftHandSide(JavaParser.LeftHandSideContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitLeftHandSide(JavaParser.LeftHandSideContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1516,30 +1420,6 @@ public class JavaBaseListener implements JavaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPredecrementExpression(JavaParser.PredecrementExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPredecrementExpression(JavaParser.PredecrementExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPreincrementExpression(JavaParser.PreincrementExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPreincrementExpression(JavaParser.PreincrementExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterUnaryExpressionNotPlusMinus(JavaParser.UnaryExpressionNotPlusMinusContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1595,18 +1475,6 @@ public class JavaBaseListener implements JavaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitMethodInvocation(JavaParser.MethodInvocationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterFieldAccess(JavaParser.FieldAccessContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFieldAccess(JavaParser.FieldAccessContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1708,18 +1576,6 @@ public class JavaBaseListener implements JavaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayAccess(JavaParser.ArrayAccessContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitArrayAccess(JavaParser.ArrayAccessContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterPackageName(JavaParser.PackageNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1763,30 +1619,6 @@ public class JavaBaseListener implements JavaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExpressionName(JavaParser.ExpressionNameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterMethodName(JavaParser.MethodNameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMethodName(JavaParser.MethodNameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAmbiguousName(JavaParser.AmbiguousNameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAmbiguousName(JavaParser.AmbiguousNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

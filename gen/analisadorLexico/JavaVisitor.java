@@ -119,12 +119,6 @@ public interface JavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitClassMemberDeclaration(JavaParser.ClassMemberDeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JavaParser#staticInitializer}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStaticInitializer(JavaParser.StaticInitializerContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JavaParser#constructorDeclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -160,12 +154,6 @@ public interface JavaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFormalParameter(JavaParser.FormalParameterContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JavaParser#throwsRule}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitThrowsRule(JavaParser.ThrowsRuleContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaParser#classTypeList}.
 	 * @param ctx the parse tree
@@ -497,18 +485,6 @@ public interface JavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIfThenStatement(JavaParser.IfThenStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JavaParser#ifThenElseStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIfThenElseStatement(JavaParser.IfThenElseStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JavaParser#ifThenElseStatementNoShortIf}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIfThenElseStatementNoShortIf(JavaParser.IfThenElseStatementNoShortIfContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JavaParser#switchStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -538,12 +514,6 @@ public interface JavaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSwitchLabels(JavaParser.SwitchLabelsContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JavaParser#switchLabel}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSwitchLabel(JavaParser.SwitchLabelContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaParser#whileStatement}.
 	 * @param ctx the parse tree
@@ -641,18 +611,6 @@ public interface JavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCatchClause(JavaParser.CatchClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JavaParser#finallyRule}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFinallyRule(JavaParser.FinallyRuleContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JavaParser#constantExpression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitConstantExpression(JavaParser.ConstantExpressionContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JavaParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -670,12 +628,6 @@ public interface JavaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAssignment(JavaParser.AssignmentContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JavaParser#leftHandSide}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLeftHandSide(JavaParser.LeftHandSideContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaParser#assignmentOperator}.
 	 * @param ctx the parse tree
@@ -761,18 +713,6 @@ public interface JavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUnaryExpression(JavaParser.UnaryExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JavaParser#predecrementExpression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPredecrementExpression(JavaParser.PredecrementExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JavaParser#preincrementExpression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPreincrementExpression(JavaParser.PreincrementExpressionContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JavaParser#unaryExpressionNotPlusMinus}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -802,12 +742,6 @@ public interface JavaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitMethodInvocation(JavaParser.MethodInvocationContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JavaParser#fieldAccess}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFieldAccess(JavaParser.FieldAccessContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaParser#primary}.
 	 * @param ctx the parse tree
@@ -857,12 +791,6 @@ public interface JavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDims(JavaParser.DimsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JavaParser#arrayAccess}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitArrayAccess(JavaParser.ArrayAccessContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JavaParser#packageName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -886,18 +814,6 @@ public interface JavaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExpressionName(JavaParser.ExpressionNameContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JavaParser#methodName}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMethodName(JavaParser.MethodNameContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JavaParser#ambiguousName}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAmbiguousName(JavaParser.AmbiguousNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaParser#literal}.
 	 * @param ctx the parse tree
