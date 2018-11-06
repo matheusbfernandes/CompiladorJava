@@ -1,17 +1,11 @@
-import afd.AFD;
-import analisadorLexico.JavaLexer;
-import analisadorLexico.JavaParser;
-import analisadorLexico.ThrowingErrorListener;
+import analisadores.JavaLexer;
+import analisadores.JavaParser;
+import analisadores.ThrowingErrorListener;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.misc.ParseCancellationException;
 import org.antlr.v4.runtime.tree.ParseTree;
-import tabelaSimbolos.Simbolo;
-import tabelaSimbolos.TabelaSimbolos;
 
 import java.io.IOException;
-import java.util.List;
 
 public class Main {
     public static void main (String[] args) throws IOException {

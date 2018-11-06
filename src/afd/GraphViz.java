@@ -1,5 +1,5 @@
 package afd;
-// GraphViz.java - a simple API to call dot from analisadorLexico.Java programs
+// GraphViz.java - a simple API to call dot from analisadores.Java programs
 
 /*$Id$*/
 /*
@@ -34,12 +34,12 @@ import java.io.InputStreamReader;
 
 /**
  * <dl>
- * <dt>Purpose: GraphViz analisadorLexico.Java API
+ * <dt>Purpose: GraphViz analisadores.Java API
  * <dd>
  *
  * <dt>Description:
- * <dd> With this analisadorLexico.Java class you can simply call dot
- *      from your analisadorLexico.Java programs.
+ * <dd> With this analisadores.Java class you can simply call dot
+ *      from your analisadores.Java programs.
  * <dt>Example usage:
  * <dd>
  * <pre>

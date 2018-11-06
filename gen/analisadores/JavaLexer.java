@@ -1,5 +1,5 @@
-// Generated from D:/CompiladorJava/src/analisadorLexico\Java.g4 by ANTLR 4.7
-package analisadorLexico;
+// Generated from D:/CompiladorJava/src/analisadores\Java.g4 by ANTLR 4.7
+package analisadores;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
