@@ -35,7 +35,7 @@ public class JavaParser extends Parser {
 		FloatNumeral=90, DoubleNumeral=91, Character=92, String=93, Espaco=94, 
 		ComentarioLinha=95, ComentarioBloco=96, AP=97, FP=98, AC=99, FC=100, ACh=101, 
 		FCh=102, Virgula=103, DoisPontos=104, Ponto=105, Interrogacao=106, PontoVirgula=107, 
-		ERROR=108;
+		StringNaoTerminada=108, ComentarioNaoTerminado=109, ERROR=110;
 	public static final int
 		RULE_compilationUnit = 0, RULE_packageDeclaration = 1, RULE_importDeclarations = 2, 
 		RULE_importDeclaration = 3, RULE_singleTypeImportDeclaration = 4, RULE_typeImportOnDemandDeclaration = 5, 
@@ -166,7 +166,7 @@ public class JavaParser extends Parser {
 		"HexNumeral", "FloatNumeral", "DoubleNumeral", "Character", "String", 
 		"Espaco", "ComentarioLinha", "ComentarioBloco", "AP", "FP", "AC", "FC", 
 		"ACh", "FCh", "Virgula", "DoisPontos", "Ponto", "Interrogacao", "PontoVirgula", 
-		"ERROR"
+		"StringNaoTerminada", "ComentarioNaoTerminado", "ERROR"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -11494,7 +11494,7 @@ public class JavaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3n\u05b9\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3p\u05b9\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+

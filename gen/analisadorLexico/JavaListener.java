@@ -188,6 +188,16 @@ public interface JavaListener extends ParseTreeListener {
 	 */
 	void exitClassMemberDeclaration(JavaParser.ClassMemberDeclarationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JavaParser#staticInitializer}.
+	 * @param ctx the parse tree
+	 */
+	void enterStaticInitializer(JavaParser.StaticInitializerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaParser#staticInitializer}.
+	 * @param ctx the parse tree
+	 */
+	void exitStaticInitializer(JavaParser.StaticInitializerContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JavaParser#constructorDeclaration}.
 	 * @param ctx the parse tree
 	 */
@@ -247,6 +257,16 @@ public interface JavaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFormalParameter(JavaParser.FormalParameterContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaParser#throwsRule}.
+	 * @param ctx the parse tree
+	 */
+	void enterThrowsRule(JavaParser.ThrowsRuleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaParser#throwsRule}.
+	 * @param ctx the parse tree
+	 */
+	void exitThrowsRule(JavaParser.ThrowsRuleContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JavaParser#classTypeList}.
 	 * @param ctx the parse tree
@@ -798,6 +818,26 @@ public interface JavaListener extends ParseTreeListener {
 	 */
 	void exitIfThenStatement(JavaParser.IfThenStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JavaParser#ifThenElseStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfThenElseStatement(JavaParser.IfThenElseStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaParser#ifThenElseStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfThenElseStatement(JavaParser.IfThenElseStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaParser#ifThenElseStatementNoShortIf}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfThenElseStatementNoShortIf(JavaParser.IfThenElseStatementNoShortIfContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaParser#ifThenElseStatementNoShortIf}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfThenElseStatementNoShortIf(JavaParser.IfThenElseStatementNoShortIfContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JavaParser#switchStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -847,6 +887,16 @@ public interface JavaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSwitchLabels(JavaParser.SwitchLabelsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaParser#switchLabel}.
+	 * @param ctx the parse tree
+	 */
+	void enterSwitchLabel(JavaParser.SwitchLabelContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaParser#switchLabel}.
+	 * @param ctx the parse tree
+	 */
+	void exitSwitchLabel(JavaParser.SwitchLabelContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JavaParser#whileStatement}.
 	 * @param ctx the parse tree
@@ -1008,6 +1058,26 @@ public interface JavaListener extends ParseTreeListener {
 	 */
 	void exitCatchClause(JavaParser.CatchClauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JavaParser#finallyRule}.
+	 * @param ctx the parse tree
+	 */
+	void enterFinallyRule(JavaParser.FinallyRuleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaParser#finallyRule}.
+	 * @param ctx the parse tree
+	 */
+	void exitFinallyRule(JavaParser.FinallyRuleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaParser#constantExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstantExpression(JavaParser.ConstantExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaParser#constantExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstantExpression(JavaParser.ConstantExpressionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JavaParser#expression}.
 	 * @param ctx the parse tree
 	 */
@@ -1037,6 +1107,16 @@ public interface JavaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAssignment(JavaParser.AssignmentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaParser#leftHandSide}.
+	 * @param ctx the parse tree
+	 */
+	void enterLeftHandSide(JavaParser.LeftHandSideContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaParser#leftHandSide}.
+	 * @param ctx the parse tree
+	 */
+	void exitLeftHandSide(JavaParser.LeftHandSideContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JavaParser#assignmentOperator}.
 	 * @param ctx the parse tree
@@ -1178,6 +1258,26 @@ public interface JavaListener extends ParseTreeListener {
 	 */
 	void exitUnaryExpression(JavaParser.UnaryExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JavaParser#predecrementExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPredecrementExpression(JavaParser.PredecrementExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaParser#predecrementExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPredecrementExpression(JavaParser.PredecrementExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaParser#preincrementExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPreincrementExpression(JavaParser.PreincrementExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaParser#preincrementExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPreincrementExpression(JavaParser.PreincrementExpressionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JavaParser#unaryExpressionNotPlusMinus}.
 	 * @param ctx the parse tree
 	 */
@@ -1227,6 +1327,16 @@ public interface JavaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMethodInvocation(JavaParser.MethodInvocationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaParser#fieldAccess}.
+	 * @param ctx the parse tree
+	 */
+	void enterFieldAccess(JavaParser.FieldAccessContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaParser#fieldAccess}.
+	 * @param ctx the parse tree
+	 */
+	void exitFieldAccess(JavaParser.FieldAccessContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JavaParser#primary}.
 	 * @param ctx the parse tree
@@ -1308,6 +1418,16 @@ public interface JavaListener extends ParseTreeListener {
 	 */
 	void exitDims(JavaParser.DimsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JavaParser#arrayAccess}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayAccess(JavaParser.ArrayAccessContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaParser#arrayAccess}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayAccess(JavaParser.ArrayAccessContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JavaParser#packageName}.
 	 * @param ctx the parse tree
 	 */
@@ -1347,6 +1467,26 @@ public interface JavaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpressionName(JavaParser.ExpressionNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaParser#methodName}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodName(JavaParser.MethodNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaParser#methodName}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodName(JavaParser.MethodNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaParser#ambiguousName}.
+	 * @param ctx the parse tree
+	 */
+	void enterAmbiguousName(JavaParser.AmbiguousNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaParser#ambiguousName}.
+	 * @param ctx the parse tree
+	 */
+	void exitAmbiguousName(JavaParser.AmbiguousNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JavaParser#literal}.
 	 * @param ctx the parse tree
