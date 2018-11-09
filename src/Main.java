@@ -6,10 +6,23 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
     public static void main (String[] args) throws IOException {
-        String fileName = "C:/Users/Matheus/Documents/Teste.java";
+        Scanner sc = new Scanner(System.in);
+
+        int opcao = sc.nextInt();
+        String fileName;
+
+        switch (opcao) {
+            case 1:
+                fileName = "C:/Users/Matheus/Documents/TesteSemErros.java";
+                break;
+            default:
+                fileName = "C:/Users/Matheus/Documents/TesteContendoErros.java";
+                break;
+        }
 
         JavaLexer scanner = new JavaLexer(CharStreams.fromFileName(fileName));
         scanner.removeErrorListeners();
@@ -27,8 +40,6 @@ public class Main {
             System.out.println("Nenhum erro encontrado.");
         }
 
-//        System.out.println(tree.toStringTree(parser));
-//
 //        allTokensGenerated.fill();
 //        List<Token> listaTokens = allTokensGenerated.getTokens();
 //

@@ -32,7 +32,7 @@ constructorDeclaration : constructorModifiers? constructorDeclarator throwsRule?
 constructorModifiers : constructorModifier | constructorModifiers constructorModifier;//<constructor modifiers> ::= <constructor modifier> | <constructor modifiers> <constructor modifier>
 constructorModifier : PUBLIC | PROTECTED | PRIVATE;//<constructor modifier> ::= public | protected | private
 constructorDeclarator : simpleTypeName AP formalParameterList? FP;//<constructor declarator> ::= <simple type name> ( <formal parameter list>? )
-formalParameterList : formalParameter | formalParameterList PontoVirgula formalParameter;//<formal parameter list> ::= <formal parameter> | <formal parameter list> , <formal parameter>
+formalParameterList : formalParameter | formalParameterList Virgula formalParameter;//<formal parameter list> ::= <formal parameter> | <formal parameter list> , <formal parameter>
 formalParameter : type variableDeclaratorId;//<formal parameter> ::= <type> <variable declarator id>
 throwsRule : THROWS classTypeList;//<throws> ::= throws <class type list>
 classTypeList : classType | classTypeList Virgula classType;//<class type list> ::= <class type> | <class type list> , <class type>
@@ -64,7 +64,7 @@ constantModifiers : PUBLIC | STATIC | FINAL;//<constant modifiers> ::= public | 
 abstractMethodDeclaration : abstractMethodModifiers? resultType methodDeclarator throwsRule? PontoVirgula;//<abstract method declaration>::= <abstract method modifiers>? <result type> <method declarator> <throws>? ;
 abstractMethodModifiers : abstractMethodModifier | abstractMethodModifiers abstractMethodModifier;//<abstract method modifiers> ::= <abstract method modifier> | <abstract method modifiers> <abstract method modifier>
 abstractMethodModifier : PUBLIC | ABSTRACT;//<abstract method modifier> ::= public | abstract
-arrayInitializer : ACh variableInitializers? Virgula Interrogacao FCh;//<array initializer> ::= { <variable initializers>? , ? }
+arrayInitializer : ACh variableInitializers? FCh;//<array initializer> ::= { <variable initializers>? , ? }
 variableInitializers : variableInitializer | variableInitializers Virgula variableInitializer;//<variable initializers> ::= <variable initializer> | <variable initializers> , <variable initializer>
 
 //Types
@@ -74,7 +74,7 @@ numericType : integralType | floatingPointType;//<numeric type> ::= <integral ty
 integralType : BYTE | SHORT | INT | LONG | CHAR;//<integral type> ::= byte | short | int | long | char
 floatingPointType : FLOAT | DOUBLE;//<floating-point type> ::= float | double
 referenceType : classOrInterfaceType | arrayType;//<reference type> ::= <class or interface type> | <array type>
-classOrInterfaceType : classType | interfaceType;//<class or interface type> ::= <class type> | <interface type>
+classOrInterfaceType : typeName;//<class or interface type> ::= <class type> | <interface type>
 classType : typeName;//<class type> ::= <type name>
 interfaceType : typeName;//<interface type> ::= <type name>
 arrayType : type AC FC;//<array type> ::= <type> [ ]
@@ -145,10 +145,10 @@ preincrementExpression : Incremento unaryExpression;//<preincrement expression> 
 unaryExpressionNotPlusMinus : postfixExpression | OpBitComp unaryExpression | OpNOT unaryExpression | castExpression;//<unary expression not plus minus> ::= <postfix expression> | ~ <unary expression> | ! <unary expression> | <cast expression>
 postdecrementExpression : postfixExpression Decremento;//<postdecrement expression> ::= <postfix expression> --
 postincrementExpression : postfixExpression Incremento;//<postincrement expression> ::= <postfix expression> ++
-postfixExpression : primary | expressionName | postfixExpression Incremento |  postfixExpression Decremento;//<postfix expression> ::= <primary> | <expression name> | <postincrement expression> | <postdecrement expression>
+postfixExpression : primary | expressionName | postfixExpression Incremento | postfixExpression Decremento;//<postfix expression> ::= <primary> | <expression name> | <postincrement expression> | <postdecrement expression>
 methodInvocation : methodName AP argumentList? FP | primary Ponto ID AP argumentList? FP | SUPER Ponto ID AP argumentList? FP;//<method invocation> ::= <method name> ( <argument list>? ) | <primary> . <identifier> ( <argument list>? ) | super . <identifier> ( <argument list>? )
 fieldAccess : primary Ponto ID | SUPER Ponto ID;//<field access> ::= <primary> . <identifier> | super . <identifier>
-primary : methodName AP argumentList? FP | primary Ponto ID AP argumentList? FP | SUPER Ponto ID AP argumentList? FP | primaryNoNewArray | primary Ponto ID | SUPER Ponto ID | arrayCreationExpression;//<primary> ::= <primary no new array> | <array creation expression>
+primary : methodName AP argumentList? FP | SUPER Ponto ID AP argumentList? FP | primaryNoNewArray | SUPER Ponto ID | arrayCreationExpression;//<primary> ::= <primary no new array> | <array creation expression>
 primaryNoNewArray : literal | THIS | AP expression FP | classInstanceCreationExpression | expressionName AC expression FC | primaryNoNewArray AC expression FC;//<primary no new array> ::= <literal> | this | ( <expression> ) | <class instance creation expression> | <field access> | <method invocation> | <array access>
 classInstanceCreationExpression : NEW classType AP argumentList? FP;//<class instance creation expression> ::= new <class type> ( <argument list>? )
 argumentList : expression | argumentList Virgula expression;//<argument list> ::= <expression> | <argument list> , <expression>
@@ -160,7 +160,7 @@ arrayAccess : expressionName AC expression FC | primaryNoNewArray AC expression 
 
 //Tokens
 packageName : ID | packageName Ponto ID;//<package name> ::= <identifier> | <package name> . <identifier>
-typeName : ID | packageName Ponto ID;//<type name> ::= <identifier> | <package name> . <identifier>
+typeName : packageName;//<type name> ::= <identifier> | <package name> . <identifier>
 simpleTypeName : ID;//<simple type name> ::= <identifier>
 expressionName : ID | ambiguousName Ponto ID;//<expression name> ::= <identifier> | <ambiguous name> . <identifier>
 methodName : ID | ambiguousName Ponto ID;//<method name> ::= <identifier> | <ambiguous name>. <identifier>
